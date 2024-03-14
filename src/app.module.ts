@@ -6,11 +6,15 @@ import { ConfigModule } from '@nestjs/config';
 // 로그관리
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 
+import { UserController } from './users/users.controller';
+import { AuthModule } from './auth/auth.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [Logger, AppService],

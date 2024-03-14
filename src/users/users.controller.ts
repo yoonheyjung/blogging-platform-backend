@@ -1,6 +1,16 @@
-import { Controller, Get, Post, HttpCode, Body } from '@nestjs/common';
-import { SignUpDto, SignInDto } from './dto/user.dto';
+import {
+  Controller,
+  Get,
+  Req,
+  Post,
+  HttpCode,
+  Param,
+  Body,
+} from '@nestjs/common';
+import { Request } from 'express';
 import jwt from 'jsonwebtoken';
+
+import { SignUpDto, SignInDto } from './dto/user.dto';
 
 // 회원가입
 @Controller('signup')
@@ -24,5 +34,18 @@ export class SignInController {
     });
 
     return 'post sign up';
+  }
+}
+
+@Controller('users')
+export class UserController {
+  @Get()
+  findAll(@Req() request: Request): string {
+    return 'This action returns all users';
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return `This action returns a #${id} user`;
   }
 }
