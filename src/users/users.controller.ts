@@ -28,10 +28,17 @@ export class SignInController {
   @Get()
   @HttpCode(200)
   create(@Body() signInDto: SignInDto) {
-    const accessToken = jwt.sign({
-      data: signInDto,
-      exp: Math.floor(Date.now() / 1000) + 60 * 60,
-    });
+    const accessToken = jwt.sign(
+      {
+        data: signInDto,
+        exp: Math.floor(Date.now() / 1000) + 60 * 60,
+      },
+      'testPrivateKey',
+      {
+        algorithm: 'RS256',
+      },
+    );
+    console.log(accessToken);
 
     return 'post sign up';
   }
